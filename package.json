@@ -1,0 +1,57 @@
+{
+  "name": "eitggc-hacked-by-ai-game",
+  "version": "0.0.1",
+  "description": "Cybersecurity challenge game powered by Claude AI",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.eitggc.hackedbyai",
+    "productName": "Hacked by AI Game",
+    "directories": {
+      "output": "dist"
+    },    
+    "files": [
+      "**/*",
+      ".env",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "images/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "images/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "images/icon.png"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "author": "EITGGC",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "node-fetch": "^2.7.0"
+  }
+}

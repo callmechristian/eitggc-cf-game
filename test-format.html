@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Formatter Test Page</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            color: #ffffff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #00d2d3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 210, 211, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-title {
+            color: #ff6b7a;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .raw-text {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #a4b0be;
+            border-left: 3px solid #ff6b7a;
+        }
+        
+        .formatted-text {
+            background: rgba(0, 210, 211, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #00d2d3;
+        }
+        
+        .format-button {
+            background: #00d2d3;
+            color: #1a1a2e;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .format-button:hover {
+            background: #ff6b7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Text Formatter Test Page</h1>
+
+        <!-- Format All Button -->
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="format-button" onclick="formatAllTests()" style="font-size: 1.2em; padding: 12px 24px;">
+                🚀 Format All Tests
+            </button>
+        </div>
+        
+        <!-- Email Test -->
+        <div class="test-section">
+            <div class="test-title">📧 Email Addresses</div>
+            <div class="raw-text">Raw: Contact support at help@cybersec.com or admin@example.org for assistance.</div>
+            <button class="format-button" onclick="formatTest('email')">Format Text</button>
+            <div class="formatted-text" id="email-result"></div>
+        </div>
+
+        <!-- Tag Test -->
+        <div class="test-section">
+            <div class="test-title">🏷️ Social Tags</div>
+            <div class="raw-text">Raw: Mention @user1 and @user2 in your message.</div>
+            <button class="format-button" onclick="formatTest('tag')">Format Text</button>
+            <div class="formatted-text" id="tag-result"></div>
+        </div>
+        
+        <!-- IP Address Test -->
+        <div class="test-section">
+            <div class="test-title">🌐 IP Addresses</div>
+            <div class="raw-text">Raw: The suspicious traffic came from 192.168.1.100 and 10.0.0.1 was also involved.</div>
+            <button class="format-button" onclick="formatTest('ip')">Format Text</button>
+            <div class="formatted-text" id="ip-result"></div>
+        </div>
+        
+        <!-- File Extensions Test -->
+        <div class="test-section">
+            <div class="test-title">📁 File Extensions</div>
+            <div class="raw-text">Raw: Download malware.exe, check document.pdf, or view image.jpg and script.js files.</div>
+            <button class="format-button" onclick="formatTest('file')">Format Text</button>
+            <div class="formatted-text" id="file-result"></div>
+        </div>
+        
+        <!-- Bold Text Test -->
+        <div class="test-section">
+            <div class="test-title">💪 Bold Text</div>
+            <div class="raw-text">Raw: This is **extremely important** and **critical security information** you must know.</div>
+            <button class="format-button" onclick="formatTest('bold')">Format Text</button>
+            <div class="formatted-text" id="bold-result"></div>
+        </div>
+        
+        <!-- Code Test -->
+        <div class="test-section">
+            <div class="test-title">💻 Code/Technical Terms</div>
+            <div class="raw-text">Raw: Run `sudo rm -rf /` or execute `ping google.com` in your terminal.</div>
+            <button class="format-button" onclick="formatTest('code')">Format Text</button>
+            <div class="formatted-text" id="code-result"></div>
+        </div>
+        
+        <!-- Single Quotes Test -->
+        <div class="test-section">
+            <div class="test-title">✨ Highlighted Text (Single Quotes)</div>
+            <div class="raw-text">Raw: Click on ''Download Now'' button or select ''Accept Terms'' to continue.</div>
+            <button class="format-button" onclick="formatTest('quotes')">Format Text</button>
+            <div class="formatted-text" id="quotes-result"></div>
+        </div>
+        
+        <!-- Warning Test -->
+        <div class="test-section">
+            <div class="test-title">⚠️ Warning Text</div>
+            <div class="raw-text">Raw: ![DANGER!] This action will ![permanently delete!] all your files.</div>
+            <button class="format-button" onclick="formatTest('warning')">Format Text</button>
+            <div class="formatted-text" id="warning-result"></div>
+        </div>
+        
+        <!-- Success Test -->
+        <div class="test-section">
+            <div class="test-title">✅ Success/Positive Text</div>
+            <div class="raw-text">Raw: +[Well done+] You have +[successfully completed+] the security challenge.</div>
+            <button class="format-button" onclick="formatTest('success')">Format Text</button>
+            <div class="formatted-text" id="success-result"></div>
+        </div>
+        
+        <!-- Error Test -->
+        <div class="test-section">
+            <div class="test-title">❌ Error/Negative Text</div>
+            <div class="raw-text">Raw: The operation -[failed miserably-] and caused -[system corruption-] errors.</div>
+            <button class="format-button" onclick="formatTest('error')">Format Text</button>
+            <div class="formatted-text" id="error-result"></div>
+        </div>
+        
+        <!-- Cyber Test -->
+        <div class="test-section">
+            <div class="test-title">🤖 Cyber/Tech Emphasis</div>
+            <div class="raw-text">Raw: The #[AI system#] detected #[malicious activity#] in your network.</div>
+            <button class="format-button" onclick="formatTest('cyber')">Format Text</button>
+            <div class="formatted-text" id="cyber-result"></div>
+        </div>
+        
+        <!-- Notes Test -->
+        <div class="test-section">
+            <div class="test-title">📝 Important Notes</div>
+            <div class="raw-text">Raw: Remember [backup your data] before proceeding and [check permissions] carefully.</div>
+            <button class="format-button" onclick="formatTest('notes')">Format Text</button>
+            <div class="formatted-text" id="notes-result"></div>
+        </div>
+        
+        <!-- Italic Test -->
+        <div class="test-section">
+            <div class="test-title">📖 Italic Text</div>
+            <div class="raw-text">Raw: This is *slightly emphasized* and *important to remember* information.</div>
+            <button class="format-button" onclick="formatTest('italic')">Format Text</button>
+            <div class="formatted-text" id="italic-result"></div>
+        </div>
+        
+        <!-- Double Quotes Test -->
+        <div class="test-section">
+            <div class="test-title">💬 Quoted Text</div>
+            <div class="raw-text">Raw: The hacker said «Your data is mine» and «Resistance is futile» during the attack.</div>
+            <button class="format-button" onclick="formatTest('quoted')">Format Text</button>
+            <div class="formatted-text" id="quoted-result"></div>
+        </div>
+        
+        <!-- Complex Mixed Test -->
+        <div class="test-section">
+            <div class="test-title">🎯 Complex Mixed Formatting</div>
+            <div class="raw-text">Raw: **URGENT**: The #[AI security system#] detected suspicious file malware.exe from IP 203.0.113.45. Contact admin@security.com immediately! Run `netstat -an` to check connections. ![DO NOT!] click on 'Download Update' or any +[suspicious links+]. [Backup your data] before taking action. The attacker said "Your firewall is -useless- against my *advanced techniques*".</div>
+            <button class="format-button" onclick="formatTest('mixed')">Format Text</button>
+            <div class="formatted-text" id="mixed-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 1 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Email in Code</div>
+            <div class="raw-text">Raw: Execute command `mail admin@security.com` to send alert.</div>
+            <button class="format-button" onclick="formatTest('nested1')">Format Text</button>
+            <div class="formatted-text" id="nested1-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 2 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Bold with Emphasis</div>
+            <div class="raw-text">Raw: **This is #[critically important#] information!** You must act now.</div>
+            <button class="format-button" onclick="formatTest('nested2')">Format Text</button>
+            <div class="formatted-text" id="nested2-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 3 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Warning with Code</div>
+            <div class="raw-text">Raw: ![WARNING: Never run `rm -rf /` command!] It will destroy your system.</div>
+            <button class="format-button" onclick="formatTest('nested3')">Format Text</button>
+            <div class="formatted-text" id="nested3-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 4 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Quote with Multiple Elements</div>
+            <div class="raw-text">Raw: The hacker said «Run malware.exe from 192.168.1.1 immediately!» during the attack.</div>
+            <button class="format-button" onclick="formatTest('nested4')">Format Text</button>
+            <div class="formatted-text" id="nested4-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 5 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Note with Formatting</div>
+            <div class="raw-text">Raw: [Remember: **always backup** your data.txt before running *any* commands]</div>
+            <button class="format-button" onclick="formatTest('nested5')">Format Text</button>
+            <div class="formatted-text" id="nested5-result"></div>
+        </div>
+        
+        <!-- Nested Patterns Test 6 -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Patterns - Success with Multiple Types</div>
+            <div class="raw-text">Raw: +[You successfully blocked attack.exe from IP 10.0.0.1+] Well done!</div>
+            <button class="format-button" onclick="formatTest('nested6')">Format Text</button>
+            <div class="formatted-text" id="nested6-result"></div>
+        </div>
+        
+        <!-- Nested Quotes Test -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested Quotes - Quotes within Quotes</div>
+            <div class="raw-text">Raw: The admin said «The hacker mentioned ''malware detected'' during our ''security audit'' conversation» yesterday.</div>
+            <button class="format-button" onclick="formatTest('nestedQuotes')">Format Text</button>
+            <div class="formatted-text" id="nestedQuotes-result"></div>
+        </div>
+        
+        <!-- Nested French Guillemets Test -->
+        <div class="test-section">
+            <div class="test-title">🔗 Nested French Guillemets - Multiple Quote Levels</div>
+            <div class="raw-text">Raw: The report states «The attacker claimed «I have access to your «classified documents»» during the breach» according to witnesses.</div>
+            <button class="format-button" onclick="formatTest('nestedGuillemets')">Format Text</button>
+            <div class="formatted-text" id="nestedGuillemets-result"></div>
+        </div>
+        
+        <!-- Complex Nested Test -->
+        <div class="test-section">
+            <div class="test-title">🎯 Complex Nested Everything</div>
+            <div class="raw-text">Raw: **ALERT**: [The #[AI system#] detected virus.exe from admin@hacker.com at IP 203.0.113.45] ![Execute `netstat -an` immediately!] +[Security status: *all systems protected*+] The system said «Your firewall blocked the -[malicious-] attack successfully».</div>
+            <button class="format-button" onclick="formatTest('nestedComplex')">Format Text</button>
+            <div class="formatted-text" id="nestedComplex-result"></div>
+        </div>
+
+        <!-- Numbered List Test -->
+        <div class="test-section">
+            <div class="test-title">🔢 Numbered List</div>
+            <div class="raw-text">Raw: 1) First item 2) Second item 3) Third item</div>
+            <button class="format-button" onclick="formatTest('numberedList')">Format Text</button>
+            <div class="formatted-text" id="numberedList-result"></div>
+        </div>
+
+    </div>
+
+    <script src="text-formatter.js"></script>
+    <script>
+        // Test data for each formatting type
+        const testData = {
+            email: "Contact support at help@cybersec.com or admin@example.org for assistance.",
+            ip: "The suspicious traffic came from 192.168.1.100 and 10.0.0.1 was also involved.",
+            tag: "Mention @user1 and @user2 in your message.",
+            file: "Download malware.exe, check document.pdf, or view image.jpg and script.js files.",
+            bold: "This is **extremely important** and **critical security information** you must know.",
+            code: "Run `sudo rm -rf /` or execute `ping google.com` in your terminal.",
+            quotes: "Click on ''Download Now'' button or select ''Accept Terms'' to continue.",
+            warning: "![DANGER!] This action will ![permanently delete!] all your files.",
+            success: "+[Well done+] You have +[successfully completed+] the security challenge.",
+            error: "The operation -[failed miserably-] and caused -[system corruption-] errors.",
+            cyber: "The #[AI system#] detected #[malicious activity#] in your network.",
+            notes: "Remember [backup your data] before proceeding and [check permissions] carefully.",
+            italic: "This is *slightly emphasized* and *important to remember* information.",
+            quoted: 'The hacker said «Your data is mine» and «Resistance is futile» during the attack.',
+            mixed: '**URGENT**: The #[AI security system#] detected suspicious file malware.exe from IP 203.0.113.45. Contact admin@security.com immediately! Run `netstat -an` to check connections. ![DO NOT!] click on \'\'Download Update\'\' or any +[suspicious links+]. [Backup your data] before taking action. The attacker said «Your firewall is -[useless-] against my advanced techniques».',
+            nested1: 'Execute command `mail admin@security.com` to send alert.',
+            nested2: '**This is #[critically important#] information!** You must act now.',
+            nested3: '![WARNING: Never run `rm -rf /` command!] It will destroy your system.',
+            nested4: 'The hacker said «Run malware.exe from 192.168.1.1 immediately!» during the attack.',
+            nested5: "\'\'Remember: **always backup** your data.txt before running *any* commands\'\'",
+            nested6: '+[You successfully blocked attack.exe from IP 10.0.0.1+] Well done!',
+            nestedQuotes: 'The admin said «The hacker mentioned \'\'malware detected\'\' during our \'\'security audit\'\' conversation» yesterday.',
+            nestedGuillemets: 'The report states «The attacker claimed «I have access to your «classified documents»» during the breach» according to witnesses.',
+            nestedComplex: '**ALERT**: [The #[AI system#] detected virus.exe from admin@hacker.com at IP 203.0.113.45] ![Execute `netstat -an` immediately!] +[Security status: *all systems protected*+] The system said «Your firewall blocked the -malicious- attack successfully».',
+            numberedList: "1) First item 2) Second item 3) Third item"
+        };
+        
+        function formatTest(testType) {
+            const rawText = testData[testType];
+            const formattedText = textFormatter.formatText(rawText);
+            document.getElementById(testType + '-result').innerHTML = formattedText;
+        }
+        
+        function formatAllTests() {
+            Object.keys(testData).forEach(testType => {
+                formatTest(testType);
+            });
+        }
+        
+        // Auto-format when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎨 Text Formatter Test Page Loaded');
+            console.log('Available test types:', Object.keys(testData));
+        });
+    </script>
+</body>
+</html>
