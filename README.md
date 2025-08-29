@@ -222,8 +222,8 @@ npm start
 
 # Configure Claude AI API credentials
 # Add the .env file with your API key
-# If you want to distribute a packaged version, add your API key to config.js
-# Be careful not to push it, as it's not excluded in the .gitignore
+# If you want to distribute a packaged version, add your API key to config.js (rename config.example.js)
+# Be careful not to push it to your branch!
 ```
 
 ## 🎯 Difficulty Level & Survival Stats
