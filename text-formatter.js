@@ -7,12 +7,12 @@ class TextFormatter {    constructor() {
         this.formatRules = [   
             // Quotes with «text» (before other patterns that might interfere)
             {
-                pattern: /«(.+)»/g,
+                pattern: /«(.*?)»/g,
                 replacement: '<span class="text-quote">"$1"</span>'
             },      
             // Email addresses (avoid matching inside HTML tags)
             {
-                pattern: /\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b(?![^<]*<\/span>)/g,
+                pattern: /\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/g,
                 replacement: '<span class="text-email">$1</span>'
             },
             // IP addresses (before other rules)
@@ -57,7 +57,7 @@ class TextFormatter {    constructor() {
             },
             // Cyber/tech emphasis with #[text#]
             {
-                pattern: /\#\[([^#\]]*?)\#\]/g,
+                pattern: /\#([^#\]]*?)\#/g,
                 replacement: '<span class="text-cyber">$1</span>'
             },
             // Numbered lists with 1), 2), 3) etc
@@ -77,7 +77,7 @@ class TextFormatter {    constructor() {
             },
             // Social tags starting with @username
             {
-                pattern: /@([a-zA-Z0-9_]+)/g,
+                pattern: /(?<![\w.])@([a-zA-Z0-9_]+)/g,
                 replacement: '<span class="text-highlight">@$1</span>'
             }
         ];

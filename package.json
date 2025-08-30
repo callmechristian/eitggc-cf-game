@@ -33,7 +33,10 @@
     ],
     "win": {
       "target": "portable",
-      "icon": "images/icon.ico"
+      "icon": "images/icon.ico",
+      "publisherName": "Christian Siman",
+      "verifyUpdateCodeSignature": false,
+      "requestedExecutionLevel": "asInvoker"
     },
     "mac": {
       "target": "dmg",

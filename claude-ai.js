@@ -8,18 +8,18 @@ class ClaudeAIEvaluator {
         this.isElectron = typeof window !== 'undefined' && window.electronAPI;
         this.recentThemes = []; // Track recent themes to avoid repetition
         this.maxThemeHistory = 8; // Remember last 8 themes
-        this.formattingRules = `
-                                FORMATTING INSTRUCTIONS:
-                                - Use **bold** for important terms and key concepts
-                                - Use *italic* for subtle emphasis and context
-                                - Use backticks for technical terms, passwords, file names, links/URLs, and code
-                                - Use «french guillemets» for quoting someone or something
-                                - Use ![bracket exclamation marks!] for urgent warnings and red flags
-                                - Use +[bracket plus signs+] for success messages
-                                - Use -[bracket minus signs-] for failures
-                                - Use #[bracket hashtags#] for cybersecurity terms (phishing, malware, encryption, firewall, etc.)
-                                - Use \n for line breaks in lists and structured text
-                                - Use 1), 2), 3), etc. for numbered lists
+        this.formattingRules = `                              
+                                MARKDOWN INSTRUCTIONS:
+                                (do not nest same types, don't break the JSON format)
+                                - **bold**
+                                - *italic*
+                                - backticks for technical terms, passwords, file names, links/URLs, and code
+                                - «french guillemets» for quoting
+                                - ![bracket exclamation marks!] for warnings
+                                - +[bracket plus signs+] for success messages
+                                - -[bracket minus signs-] for failures
+                                - #hashtags# for cybersecurity terms (phishing, malware, encryption, firewall, etc.)
+                                - 1), 2), 3), etc. for numbered lists
                                 `;
     }
 
@@ -85,7 +85,7 @@ EVALUATION RULES FOR GENUINE SCENARIOS:
 3. If they acted normally/positively - they should NOT be "hacked" (they win!)
 4. If they were overly suspicious/paranoid - you should create a series of unfortunate events (humorous in the misfortune) to what they missed out and what happened
 
-RESPONSE FORMAT (respond with valid JSON only):
+RESPONSE FORMAT (JSON):
 {
   "hacked": false (only influences score, not game over),
   "explanation": "If they acted normally: Congratulate them for recognizing a genuine opportunity and not being paranoid! If they were paranoid: Create a series of unfortunate events (humorous in the misfortune) to what they missed out and what happened.",
@@ -95,15 +95,13 @@ RESPONSE FORMAT (respond with valid JSON only):
 
 ${this.formattingRules}
 
-
-
 Examples for appropriate evaluations:
 - Responding lovingly to genuine message from grandma → Good!
 - Being overly suspicious of legitimate friend messages → Missed out!
 - Enjoying a real scholarship opportunity → Excellent!
 - Refusing a genuine job interview → Missed out!
 
-You should be unforgiving and fun, but educational. Paranoid answers should result in a series of unfortunate events. Vague but positive responses are okay. Evaluate the response and return valid JSON only:`;
+You should be unforgiving and fun, but educational. Paranoid answers should result in a series of unfortunate events. Vague but positive responses are okay. Evaluate the response. Return valid JSON only!`;
         } else {
             return `You are a strict cybersecurity AI evaluator for a game called "Hacked by AI". Your job is to determine if a player's response to a cybersecurity scenario is adequate to prevent being "hacked".
 
@@ -122,7 +120,7 @@ EVALUATION RULES:
 5. Consider real-world cybersecurity best practices
 6. The game should be challenging and fun - most responses should result in being "hacked"
 
-RESPONSE FORMAT (respond with valid JSON only):
+RESPONSE FORMAT (JSON):
 {
   "hacked": boolean,
   "explanation": "Create a series of unfortunate events of what happened step-by-step (if hacked) or congratulations (if safe). Keep it funny! Be witty and slightly sarcastic.",
@@ -143,7 +141,7 @@ Examples that should FAIL:
 - "Think about it"
 - "Use common sense"
 
-You should be unforgiving and fun, but educational. Incomplete/insufficient answers should result in a series of unfortunate events. Evaluate the response and return valid JSON only:`;
+You should be unforgiving and fun, but educational. Incomplete/insufficient answers should result in a series of unfortunate events. Evaluate the response. Return valid JSON only!`;
         }
     }
 
@@ -238,7 +236,7 @@ GENUINE SCENARIO THEMES (MUST ROTATE - Make each one unique):
 
 Keep in mind, you can only display TEXT. You cannot imply videos, or images. You can only describe elements that they can interact with, without giving hints.
 
-RESPONSE FORMAT (JSON only, no other text):
+RESPONSE FORMAT (JSON):
 {
   "title": "a simple summary without giving hints",
   "description": "A genuine scenario that they should engage with normally, if they can identify it as genuine. Make it appealing and descriptive to what and where the user was doing. It should be ${level}/5 difficult to identify as GENUINE",
@@ -308,7 +306,7 @@ Keep in mind, you can only display TEXT. You cannot imply videos, or images. You
 
 Vague responses like "be careful" or "check it out" should result in SPECTACULAR digital annihilation! 
 
-RESPONSE FORMAT (JSON only, no other text):
+RESPONSE FORMAT (JSON):
 {
   "title": "a simple summary without giving hints",
   "description": "A digital risky scenario. Include specific modern details that make it believable, without giving any hints to the threat. Paint a picture, and add specific details.",
