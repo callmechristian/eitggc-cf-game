@@ -216,23 +216,36 @@ ${titleHistoryText}${recentThemesText}
 Highschool girls from Belgium
 
 GENUINE SCENARIO THEMES (MUST ROTATE - Make each one unique):
-1. **Entertainment & Events**: Concert tickets, festival passes, movie premieres, gaming tournaments, streaming events
-2. **Education & Career**: Scholarship opportunities, internship offers, university programs, skill-building courses, mentorship programs  
-3. **Social & Friends**: Real friend messages, group chat invitations, photo sharing, event planning, study groups
-4. **Shopping & Deals**: Legitimate sales from known brands, student discounts, seasonal promotions, loyalty programs
-5. **Technology & Apps**: Genuine app updates, new feature announcements, legitimate software upgrades, platform migrations
-6. **Health & Wellness**: Fitness challenges, mental health resources, nutrition programs, meditation apps, wellness communities
-7. **Hobbies & Interests**: Art workshops, book clubs, photography contests, music lessons, creative challenges
-8. **Travel & Adventure**: Student travel programs, exchange opportunities, local event discoveries, adventure clubs
-9. **Finance & Savings**: Legitimate banking features, student account offers, budgeting tools, financial literacy programs
-10. **Gaming & Entertainment**: Real game updates, legitimate DLC releases, community events, streaming platform features
+Concert tickets, festival passes, movie premieres, gaming tournaments, streaming events
+Scholarship opportunities, internship offers, university programs, skill-building courses, mentorship programs  
+Real friend messages, group chat invitations, photo sharing, event planning, study groups
+Legitimate sales from known brands, student discounts, seasonal promotions, loyalty programs
+Genuine app updates, new feature announcements, legitimate software upgrades, platform migrations
+Fitness challenges, mental health resources, nutrition programs, meditation apps, wellness communities
+Art workshops, book clubs, photography contests, music lessons, creative challenges
+Student travel programs, exchange opportunities, local event discoveries, adventure clubs
+Legitimate banking features, student account offers, budgeting tools, financial literacy programs
+Real game updates, legitimate DLC releases, community events, streaming platform features
 
-🎯 GENUINE DIVERSITY REQUIREMENTS:
+🎯 DIVERSITY REQUIREMENTS:
 - Make each scenario feel completely different from previous ones
 - Focus on opportunities Belgian teenagers would genuinely want
 - Include realistic details that make engagement appealing
 - Vary the communication method (text, email, app notification, etc.)
 - Create FOMO (fear of missing out) for legitimate opportunities
+- Should be ${level}/5 MISLEADING to identify from the following list of threats:
+1. **Password & Authentication Attacks**: Credential stuffing, password breaches, 2FA bypass attempts, account takeover scenarios
+2. **Social Engineering Beyond Phishing**: Pretexting phone calls, fake tech support, impersonation attacks, psychological manipulation
+3. **Network & WiFi Security**: Evil twin networks, man-in-the-middle attacks, public WiFi dangers, router hijacking
+4. **Mobile & App Security**: Fake apps, permission abuse, SMS hijacking, mobile malware, app store scams
+5. **IoT & Smart Device Threats**: Smart home hacking, camera hijacking, voice assistant abuse, device botnet recruitment
+6. **AI & Deepfake Deception**: Voice cloning scams, deepfake videos, AI-generated content, chatbot manipulation
+7. **Privacy & Data Harvesting**: Location tracking, data broker threats, digital stalking, metadata exposure
+8. **Financial & Crypto Scams**: Investment frauds, fake trading platforms, crypto wallet attacks, payment app scams
+9. **Gaming & Entertainment Threats**: Game account theft, streaming platform hacks, fake gaming deals, esports scams
+10. **Educational & Career Scams**: Fake internships, scholarship frauds, fake online courses, academic phishing
+11. **Shopping & E-commerce Attacks**: Fake stores, payment skimming, fake reviews, counterfeit goods
+12. **Healthcare & Personal Data**: Medical identity theft, fake health apps, prescription scams, fitness tracker exploitation
 
 Keep in mind, you can only display TEXT. You cannot imply videos, or images. You can only describe elements that they can interact with, without giving hints.
 
