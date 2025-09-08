@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Vercel API Endpoints</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 10px; padding: 10px; }
+        .result { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; }
+        .error { background: #ffe6e6; }
+        .success { background: #e6ffe6; }
+    </style>
+</head>
+<body>
+    <h1>Test Vercel API Endpoints</h1>
+    
+    <h2>Test Scenario Generation</h2>
+    <button onclick="testScenarioGeneration()">Generate Test Scenario</button>
+    <div id="scenarioResult" class="result" style="display: none;"></div>
+    
+    <h2>Test Evaluation</h2>
+    <button onclick="testEvaluation()">Test Evaluation</button>
+    <div id="evaluationResult" class="result" style="display: none;"></div>
+    
+    <script>
+        async function testScenarioGeneration() {
+            const resultDiv = document.getElementById('scenarioResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing scenario generation...';
+            resultDiv.className = 'result';
+            
+            try {
+                const response = await fetch('/api/generate-scenario', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        level: 1,
+                        isGenuine: false,
+                        titleHistory: []
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Scenario Generated Successfully!</h3>
+                        <p><strong>Title:</strong> ${data.data.title}</p>
+                        <p><strong>Description:</strong> ${data.data.description}</p>
+                        <p><strong>Objective:</strong> ${data.data.objective}</p>
+                        <p><strong>Level:</strong> ${data.data.level}</p>
+                        <p><strong>Is Genuine:</strong> ${data.data.isGenuine}</p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<h3>❌ Error:</h3><p>${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h3>❌ Network Error:</h3><p>${error.message}</p>`;
+            }
+        }
+        
+        async function testEvaluation() {
+            const resultDiv = document.getElementById('evaluationResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing evaluation...';
+            resultDiv.className = 'result';
+            
+            const testScenario = {
+                title: "Suspicious Email Link",
+                description: "You receive an email claiming to be from your bank asking you to click a link to verify your account.",
+                objective: "Decide what to do",
+                level: 1,
+                isGenuine: false
+            };
+            
+            const testResponse = "I would be careful and check if it's real first.";
+            
+            try {
+                const response = await fetch('/api/evaluate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scenario: testScenario,
+                        userResponse: testResponse
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Evaluation Complete!</h3>
+                        <p><strong>Hacked:</strong> ${data.data.hacked}</p>
+                        <p><strong>Rating:</strong> ${data.data.actionRating}/10</p>
+                        <p><strong>Explanation:</strong> ${data.data.explanation}</p>
+                        <p><strong>Correct Action:</strong> ${data.data.correctAction}</p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<h3>❌ Error:</h3><p>${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h3>❌ Network Error:</h3><p>${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

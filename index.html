@@ -3,237 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacked by AI - Cybersecurity Challenge</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Access Restricted</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Matrix rain background effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .matrix-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(90deg, transparent 79px, #00ff41 81px, #00ff41 82px, transparent 84px),
+                linear-gradient(#00ff41 50%, transparent 50%);
+            background-size: 84px 84px, 42px 42px;
+            animation: matrix-rain 20s linear infinite;
+        }
+
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .password-container {
+            background: rgba(15, 15, 15, 0.95);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 65, 0.3),
+                inset 0 0 30px rgba(0, 255, 65, 0.1);
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
+        }
+
+        .access-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff41;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .access-subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .password-form {
+            margin-bottom: 30px;
+        }
+
+        .password-field {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .password-field:focus {
+            outline: none;
+            border-color: #00ff41;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+        }
+
+        .password-field::placeholder {
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .cyber-button {
+            background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+        }
+
+        .cyber-button:active {
+            transform: translateY(0);
+        }
+
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+
+        .password-error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff4444;
+            border-radius: 5px;
+            padding: 10px;
+            color: #ff6666;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 20%, 40%, 60%, 80% { transform: translateX(0); }
+            10%, 30%, 50%, 70% { transform: translateX(-5px); }
+            15%, 35%, 55%, 75% { transform: translateX(5px); }
+        }
+
+        .password-hints {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #00ff41;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .password-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .access-title {
+                font-size: 1.5rem;
+            }
+            
+            .password-field {
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="matrix-bg"></div>
     
-    <div class="app-container">
-        <div class="content-wrapper">
-            <header class="game-header">
-                <img src="images/logo.png" alt="Hacked by AI" class="logo">
-                <p class="subtitle">Can you outsmart the hacker?</p>
-            </header>
-        <div class="game-area">
-            <!-- Loading Screen -->
-            <div id="loading-screen" class="screen">
-                <div class="simple-loading">
-                    <h2 id="loading-message">Creating scenario...</h2>
-                </div>
-            </div>
-
-            <!-- Start Screen -->
-            <div id="start-screen" class="screen active">                
-                <div class="volume-control-corner">
-                    <div class="volume-slider-container">
-                        <input type="range" id="volume-slider" min="0" max="100" value="15" class="volume-slider">
-                        <span id="volume-value" class="volume-value">15%</span>
-                    </div>
-                    <div class="audio-toggles">
-                        <button id="toggle-music" class="toggle-button active">🎵</button>
-                        <button id="toggle-sfx" class="toggle-button active">🔊</button>
-                    </div>
-                </div>
-                  <div class="start-content">
-                    <p>Dive into a world of cybertech, test your skills, outsmart the evil AI, and show everyone you've got what it takes to be the ultimate cyber expert!</p>
-                    
-                    <div class="start-buttons">
-                        <button id="start-game" class="cyber-button">BRING IT ON 💪</button>
-                        <button id="how-to-play" class="cyber-button secondary">HOW TO PLAY 📖</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- How to Play Screen -->
-            <div id="how-to-play-screen" class="screen">
-                <div class="how-to-play-content">
-                    <h2>🎯 HOW TO SURVIVE</h2>
-                    
-                    <div class="controls-section">
-                        <h3>⌨️ Controls</h3>
-                        <div class="controls-list">
-                            <div class="control-item">
-                                <strong>Tab:</strong> Navigate between buttons and interactive elements
-                            </div>
-                            <div class="control-item">
-                                <strong>Enter:</strong> Press highlighted buttons
-                            </div>
-                            <div class="control-item">
-                                <strong>Arrow Keys (↑↓):</strong> Scroll up and down the page
-                            </div>
-                            <div class="control-item">
-                                <strong>Ctrl + Enter:</strong> Submit your action (in the game)
-                            </div>
-                            <div class="control-item">
-                                <strong>F11:</strong> Toggle fullscreen mode
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="instructions-section">
-                        <div class="instruction-item">
-                            <div class="instruction-icon">🤖</div>
-                            <div class="instruction-text">
-                                <h3>AI-Powered Scenarios</h3>
-                                <p>Each cybersecurity threat is generated by AI and is completely unique. No two games are the same!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="instruction-item">
-                            <div class="instruction-icon">⌨️</div>
-                            <div class="instruction-text">
-                                <h3>Type Your Response</h3>
-                                <p>Read the scenario carefully and type exactly what you would do. Be specific and technically accurate!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="instruction-item">
-                            <div class="instruction-icon">🛡️</div>
-                            <div class="instruction-text">
-                                <h3>Survive or Get Hacked</h3>
-                                <p>The AI evaluates your response. Good cybersecurity = secure. Poor response = HACKED!</p>
-                            </div>
-                        </div>
-                        
-                        <div class="instruction-item">
-                            <div class="instruction-icon">🏆</div>
-                            <div class="instruction-text">
-                                <h3>Beat Your High Score</h3>
-                                <p>How many levels can you survive? Each level gets harder. Compete for the highest score!</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tips-section">
-                        <h3>💡 Pro Tips</h3>
-                        <ul>
-                            <li>Be specific in your responses - "check for malware" is better than "be careful"</li>
-                            <li>Think like a real cybersecurity ninja</li>
-                            <li>Consider multiple data points and defense strategies</li>
-                            <li>Use technical terminology when appropriate</li>
-                            <li>Remember: the AI wants you to fail</li>
-                            <li>Don't just identify threats - explain how you'd mitigate them</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="example-section">
-                        <h3>📝 Example Responses</h3>
-                        <div class="example-item good">
-                            <strong>✅ Good:</strong> "I would immediately disconnect from the network, run a full antivirus scan, check system logs for suspicious activity, and change all passwords."
-                        </div>
-                        <div class="example-item bad">
-                            <strong>❌ Poor:</strong> "I would be careful and not click anything suspicious."
-                        </div>
-                    </div>
-                    
-                    <div class="how-to-play-buttons">
-                        <button id="back-to-start" class="cyber-button secondary">← BACK</button>
-                        <button id="start-from-guide" class="cyber-button">LET'S GO! 🚀</button>
-                    </div>
-                </div>
+    <div class="password-container">
+        <img src="images/logo.png" alt="Hacked by AI" class="logo">
+        <h1 class="access-title">🔒 ACCESS RESTRICTED</h1>
+        <p class="access-subtitle">Enter the access code to continue to the cybersecurity challenge</p>
+        
+        <div class="password-form">
+            <input type="password" id="passwordInput" placeholder="Enter access code..." class="password-field" autofocus>
+            <button id="submitButton" class="cyber-button">🚀 ACCESS SYSTEM</button>
+            
+            <div id="loadingIndicator" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Verifying access...</p>
             </div>
             
-            <!-- Game Screen -->
-            <div id="game-screen" class="screen">                
-                <div class="scenario-container">
-                    <div class="scenario-header">
-                        <div class="scenario-info">
-                            <span class="difficulty-indicator">Difficulty <span id="scenario-counter">1</span></span>
-                            <span class="timer-indicator"><span id="survival-time">00:00</span></span>
-                        </div>
-                    </div>
-                    <div class="scenario-content">
-                        <h3 id="scenario-title">Loading Scenario...</h3>
-                        <p id="scenario-description">Please wait...</p>
-                        <div class="objective">
-                            <strong>OBJECTIVE:</strong>
-                            <span id="scenario-objective">Survive the cyber attack</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-section">
-                    <label for="user-input" class="input-label">What do you do?</label>
-                    <textarea id="user-input" placeholder="Type your response here..." rows="4"></textarea>
-                    <button id="submit-action" class="cyber-button">EXECUTE ACTION</button>
-                </div>
-            </div>            
-            <!-- Hack Alert Screen -->
-            <div id="hack-alert-screen" class="screen">
-                <div class="hack-alert-content">
-                    <div class="hack-alert-icon">💀</div>
-                    <h2 class="hack-alert-title">YOU'VE BEEN HACKED!</h2>
-                    <div class="hack-alert-animation">
-                        <div class="glitch-line"></div>
-                        <div class="glitch-line"></div>
-                        <div class="glitch-line"></div>
-                    </div>
-                    <button id="see-results" class="cyber-button">SEE WHAT HAPPENED</button>
-                </div>            </div>
-
-            <!-- Success Alert Screen -->
-            <div id="success-alert-screen" class="screen">
-                <div class="success-alert-content">
-                    <div class="success-alert-icon">🛡️</div>
-                    <h2 class="success-alert-title">THREAT NEUTRALIZED!</h2>
-                    <div class="success-alert-animation">
-                        <div class="success-line"></div>
-                        <div class="success-line"></div>
-                        <div class="success-line"></div>
-                    </div>
-                    <button id="see-success-results" class="cyber-button">SEE YOUR SCORE</button>
-                </div>
+            <div id="errorMessage" class="password-error" style="display: none;">
+                ❌ Access Denied - Invalid Password
             </div>
-
-            <!-- Result Screen -->
-            <div id="result-screen" class="screen">
-                <div class="result-content">
-                    <div class="result-explanation">
-                        <h4>What happened:</h4>
-                        <p id="hack-explanation">The AI will explain your doom...</p>
-                    </div>
-                    <div class="result-education">
-                        <h4>What you should have done:</h4>
-                        <p id="correct-action">The proper cybersecurity approach...</p>
-                    </div>
-                    <div class="action-rating-section">
-                        <div id="action-rating">Action rating will appear here...</div>
-                    </div>
-                    <div class="result-actions">
-                        <button id="next-scenario" class="cyber-button" style="display: none;">EASY. NEXT?</button>
-                        <button id="restart-game" class="cyber-button">TRY AGAIN</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Recap Screen -->
-            <div id="recap-screen" class="screen">
-                <div class="recap-content">
-                    <div class="recap-icon">💀</div>
-                    <h2>GAME OVER - YOU'VE BEEN HACKED!</h2>
-                    <p>Here's how your digital security journey ended...</p>
-                    <div class="final-stats">
-                        <p><strong>🏆 LEVELS SURVIVED:</strong> <span id="final-scenarios" class="highlight-score">0</span></p>
-                        <p><strong>⏱️ PLAY TIME:</strong> <span id="final-time">00:00</span></p>
-                        <p><strong>💯 CYBER SCORE:</strong> <span id="final-cyber-score" class="score">0/0 (0%)</span></p>
-                        <p><strong>🎯 RANK:</strong> <span id="performance-level" class="performance">📚 NEEDS TRAINING</span></p>
-                    </div>
-                    <div class="high-score-challenge">
-                        <p>💪 Think you can do better? Try to beat your high score!</p>
-                    </div>
-                    <button id="play-again" class="cyber-button">PLAY AGAIN</button>
-                </div>
-            </div>
-        </div>        
-        <footer class="game-footer">
-            <p>⚠️ Educational purposes only. Real cybersecurity is serious business! ⚠️</p>
-        </footer>
         </div>
-    </div>    
-    <script src="text-formatter.js"></script>
-    <script src="claude-ai.js"></script>
-    <script src="scenarios.js"></script>
-    <script src="script.js"></script>
+        
+        <div class="password-hints">
+            <p class="hint-text">💡 Contact your instructor for the access code</p>
+            <p class="hint-text">🛡️ This game contains cybersecurity educational content</p>
+        </div>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const submitButton = document.getElementById('submitButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        // Handle password submission
+        async function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            if (enteredPassword === '') {
+                showError('Please enter an access code');
+                return;
+            }
+
+            // Show loading
+            showLoading(true);
+            hideError();
+            
+            try {
+                // Send password to server for verification
+                const response = await fetch('/api/verify-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: enteredPassword })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Correct password - redirect to game
+                    showLoading(false);
+                    
+                    // Store JWT token for authentication
+                    sessionStorage.setItem('gameAccess', 'authorized');
+                    sessionStorage.setItem('authToken', result.token);
+                    sessionStorage.setItem('tokenExpiry', Date.now() + (result.expiresIn * 1000));
+                    
+                    // Success message before redirect
+                    submitButton.textContent = '✅ ACCESS GRANTED';
+                    submitButton.style.background = 'linear-gradient(135deg, #00ff41 0%, #00cc33 100%)';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'game.html';
+                    }, 1000);
+                } else {
+                    // Wrong password
+                    showLoading(false);
+                    showError(result.error || '❌ Access Denied - Invalid Password');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            } catch (error) {
+                // Network error
+                showLoading(false);
+                showError('🌐 Network error - please try again');
+                console.error('Password verification error:', error);
+            }
+        }
+
+        function showLoading(show) {
+            if (show) {
+                loadingIndicator.classList.add('active');
+                submitButton.disabled = true;
+                submitButton.style.opacity = '0.6';
+            } else {
+                loadingIndicator.classList.remove('active');
+                submitButton.disabled = false;
+                submitButton.style.opacity = '1';
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        // Event listeners
+        submitButton.addEventListener('click', checkPassword);
+        
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Focus on password field when page loads
+        window.addEventListener('load', function() {
+            passwordInput.focus();
+        });
+
+        // Prevent right-click to view source (basic protection)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable common developer shortcuts (basic protection)
+        document.addEventListener('keydown', function(e) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+J
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) ||
+                (e.ctrlKey && e.keyCode === 85) ||
+                (e.ctrlKey && e.shiftKey && e.keyCode === 74)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </body>
 </html>

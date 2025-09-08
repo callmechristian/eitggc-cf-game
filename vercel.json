@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "api/evaluate.js": {
+      "maxDuration": 30
+    },
+    "api/generate-scenario.js": {
+      "maxDuration": 30
+    },
+    "api/verify-password.js": {
+      "maxDuration": 10
+    },
+    "api/validate-token.js": {
+      "maxDuration": 5
+    }
+  }
+}

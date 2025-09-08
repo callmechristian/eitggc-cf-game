@@ -2,9 +2,11 @@
   "name": "eitggc-hacked-by-ai-game",
   "version": "0.0.1",
   "description": "Cybersecurity challenge game powered by Claude AI",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "start": "electron .",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "electron": "electron .",
     "build-win": "electron-builder --win",
     "build-mac": "electron-builder --mac",
     "build-linux": "electron-builder --linux",
@@ -15,7 +17,7 @@
     "productName": "Hacked by AI Game",
     "directories": {
       "output": "dist"
-    },    
+    },
     "files": [
       "**/*",
       ".env",
@@ -47,14 +49,13 @@
       "icon": "images/icon.png"
     }
   },
-  "devDependencies": {
-    "electron": "^28.0.0",
-    "electron-builder": "^24.6.4"
-  },
   "author": "EITGGC",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "node-fetch": "^2.7.0"
   }
 }
