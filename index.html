@@ -4,89 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Access Restricted</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Password screen specific styles that extend the main game styling */
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        /* Matrix rain background effect */
-        .matrix-bg {
+        .password-screen {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .matrix-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(90deg, transparent 79px, #00ff41 81px, #00ff41 82px, transparent 84px),
-                linear-gradient(#00ff41 50%, transparent 50%);
-            background-size: 84px 84px, 42px 42px;
-            animation: matrix-rain 20s linear infinite;
-        }
-
-        @keyframes matrix-rain {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
 
         .password-container {
-            background: rgba(15, 15, 15, 0.95);
-            border: 2px solid #00ff41;
-            border-radius: 10px;
-            padding: 40px;
-            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: clamp(30px, 5vw, 50px);
+            max-width: 480px;
             width: 90%;
             text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 
-                0 0 30px rgba(0, 255, 65, 0.3),
-                inset 0 0 30px rgba(0, 255, 65, 0.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .logo {
-            max-width: 200px;
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .password-header {
+            margin-bottom: 30px;
+        }
+
+        .password-container .logo {
+            max-width: clamp(150px, 25vw, 220px);
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5));
+            filter: drop-shadow(0 0 15px rgba(0, 210, 211, 0.3));
         }
 
         .access-title {
-            font-size: 1.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
-            color: #00ff41;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+            letter-spacing: 0.1em;
+            color: #ff4757;
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 71, 87, 0.5); }
+            to { text-shadow: 0 0 25px rgba(255, 71, 87, 0.8); }
         }
 
         .access-subtitle {
-            font-size: 1rem;
-            color: #ccc;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #a4b0be;
             margin-bottom: 30px;
-            line-height: 1.4;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         .password-form {
@@ -95,54 +103,54 @@
 
         .password-field {
             width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #333;
-            border-radius: 5px;
-            color: #fff;
+            padding: clamp(14px, 2vh, 18px);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #e0e0e0;
             margin-bottom: 20px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'JetBrains Mono', monospace;
             text-align: center;
-            letter-spacing: 2px;
+            letter-spacing: 0.1em;
+            backdrop-filter: blur(5px);
         }
 
         .password-field:focus {
             outline: none;
-            border-color: #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+            border-color: #00d2d3;
+            box-shadow: 
+                0 0 0 2px rgba(0, 210, 211, 0.2),
+                0 4px 16px rgba(0, 210, 211, 0.15);
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .password-field::placeholder {
-            color: #666;
-            letter-spacing: 1px;
+            color: #6c7b7f;
+            letter-spacing: 0.05em;
         }
 
+        /* Use the exact same cyber-button styles from main game */
         .cyber-button {
-            background: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+            background: linear-gradient(135deg, #00d2d3 0%, #0097e6 100%);
+            color: #ffffff;
             border: none;
-            padding: 15px 30px;
-            font-size: 1rem;
+            padding: clamp(12px, 2vh, 16px) clamp(24px, 4vw, 32px);
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
-            color: #000;
-            border-radius: 5px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 4px 16px rgba(0, 210, 211, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-        }
-
-        .cyber-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
-        }
-
-        .cyber-button:active {
-            transform: translateY(0);
+            width: 100%;
         }
 
         .cyber-button::before {
@@ -152,7 +160,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -160,51 +168,75 @@
             left: 100%;
         }
 
+        .cyber-button:hover {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%);
+            box-shadow: 
+                0 6px 24px rgba(255, 71, 87, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .cyber-button:active {
+            transform: translateY(0) scale(0.98);
+            transition: all 0.1s;
+        }
+
         .password-error {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid #ff4444;
-            border-radius: 5px;
-            padding: 10px;
-            color: #ff6666;
-            font-size: 0.9rem;
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            color: #ff6b7a;
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
             margin-top: 15px;
-            animation: shake 0.5s ease-in-out;
+            animation: shake 0.5s ease-in-out, errorPulse 2s ease-in-out;
+            backdrop-filter: blur(5px);
         }
 
         @keyframes shake {
             0%, 20%, 40%, 60%, 80% { transform: translateX(0); }
-            10%, 30%, 50%, 70% { transform: translateX(-5px); }
-            15%, 35%, 55%, 75% { transform: translateX(5px); }
+            10%, 30%, 50%, 70% { transform: translateX(-3px); }
+            15%, 35%, 55%, 75% { transform: translateX(3px); }
+        }
+
+        @keyframes errorPulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
         }
 
         .password-hints {
-            border-top: 1px solid #333;
-            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            margin-top: 20px;
         }
 
         .hint-text {
-            font-size: 0.9rem;
-            color: #888;
-            line-height: 1.4;
+            font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+            color: #6c7b7f;
+            line-height: 1.6;
+            margin: 8px 0;
+            font-weight: 400;
         }
 
         .loading {
             display: none;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .loading.active {
             display: block;
+            animation: slideIn 0.3s ease;
         }
 
         .loading-spinner {
-            border: 3px solid #333;
-            border-top: 3px solid #00ff41;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #00d2d3;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -212,20 +244,28 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive */
+        .loading p {
+            color: #a4b0be;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+            font-weight: 500;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 480px) {
             .password-container {
-                padding: 30px 20px;
+                padding: 25px 20px;
                 margin: 20px;
             }
             
-            .access-title {
-                font-size: 1.5rem;
-            }
-            
             .password-field {
-                padding: 12px;
-                font-size: 1rem;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        /* Dark theme toggle compatibility */
+        @media (prefers-color-scheme: dark) {
+            .password-field::placeholder {
+                color: #666;
             }
         }
     </style>
@@ -235,7 +275,6 @@
     
     <div class="password-container">
         <img src="images/logo.png" alt="Hacked by AI" class="logo">
-        <h1 class="access-title">🔒 ACCESS RESTRICTED</h1>
         <p class="access-subtitle">Enter the access code to continue to the cybersecurity challenge</p>
         
         <div class="password-form">
@@ -254,7 +293,6 @@
         
         <div class="password-hints">
             <p class="hint-text">💡 Contact your instructor for the access code</p>
-            <p class="hint-text">🛡️ This game contains cybersecurity educational content</p>
         </div>
     </div>
 
