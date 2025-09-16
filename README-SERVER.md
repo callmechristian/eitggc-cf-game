@@ -49,7 +49,6 @@ http://localhost:3000
 
 ## Architecture Changes
 
-- **Before**: Electron app with direct Claude API calls from main process
 - **After**: Web server with Claude API calls from backend, frontend uses fetch API
 
 ## Files Modified

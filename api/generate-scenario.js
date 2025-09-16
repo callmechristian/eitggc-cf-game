@@ -80,11 +80,11 @@ ${titleHistoryText}${recentThemesText}
 - Make it something they would WANT to engage with
 - Include realistic details
 - Do not give tips like "official", "genuine", or "trusted"
-- It should be ${level}/5 difficult to identify as genuine
+- It should be ${level}/3 difficult to identify as genuine
 - The "correct" action is to engage normally and enjoy the opportunity
 
 🎮 TARGET AUDIENCE: 
-Highschool girls from Belgium
+Highschool girls from European countries (14-18 years old)
 
 GENUINE SCENARIO THEMES (MUST ROTATE - Make each one unique):
 Concert tickets, festival passes, movie premieres, gaming tournaments, streaming events
@@ -104,7 +104,7 @@ Real game updates, legitimate DLC releases, community events, streaming platform
 - Include realistic details that make engagement appealing
 - Vary the communication method (text, email, app notification, etc.)
 - Create FOMO (fear of missing out) for legitimate opportunities
-- Should be ${level}/5 MISLEADING to identify from the following list of threats:
+- Should be ${level}/3 MISLEADING to identify from the following list of threats:
 1. **Password & Authentication Attacks**: Credential stuffing, password breaches, 2FA bypass attempts, account takeover scenarios
 2. **Social Engineering Beyond Phishing**: Pretexting phone calls, fake tech support, impersonation attacks, psychological manipulation
 3. **Network & WiFi Security**: Evil twin networks, man-in-the-middle attacks, public WiFi dangers, router hijacking
@@ -123,7 +123,7 @@ Keep in mind, you can only display TEXT. You cannot imply videos, or images. You
 RESPONSE FORMAT (JSON):
 {
   "title": "a simple summary without giving hints",
-  "description": "A genuine scenario that they should engage with normally, if they can identify it as genuine. Make it appealing and descriptive to what and where the user was doing. It should be ${level}/5 difficult to identify as GENUINE",
+  "description": "A genuine scenario that they should engage with normally, if they can identify it as genuine. Make it appealing and descriptive to what and where the user was doing. It should be ${level}/3 difficult to identify as GENUINE",
   "objective": "a simple objective in up to 8 words, without giving ANY hints that it's genuine. Can be: Decide what to do",
   "level": integer (indicating difficulty level),
   "isGenuine": true
@@ -145,7 +145,7 @@ ${titleHistoryText}${recentThemesText}
 🎯 SCENARIO DESIGN PHILOSOPHY:
 - Make it RELATABLE but DEADLY - situations they'll actually face
 - Make it increasingly harder as the game progresses
-- Level 0 should be very easy, Level 5 should be nearly impossible and require extreme specificity
+- Level 0 should be very easy, Level 3 should be nearly impossible and require extreme specificity
 - Hide traps within traps - multiple layers of deception  
 - Demand LASER PRECISION - only cybersecurity ninjas survive
 - Make failure HILARIOUS but educational
@@ -175,10 +175,9 @@ SCENARIO THEMES (MUST ROTATE - Pick a DIFFERENT theme each time):
 - Make each scenario feel completely different
 
 🎮 LEVEL PROGRESSION GUIDE:
-- Level 0-1: Single attack vector, obvious red flags
-- Level 2-3: Multiple attack vectors, some legitimate-seeming elements  
-- Level 4-5: Advanced persistent threats, nearly impossible to detect
-- Level 6+: Nation-state level sophistication, requires expert knowledge
+- Level 1: Single attack vector, obvious red flags
+- Level 2: Multiple attack vectors, some legitimate-seeming elements  
+- Level 3: Advanced persistent threats, nearly impossible to detect
 
 🎪 TONE REQUIREMENTS:
 - DRAMATIC and fun
