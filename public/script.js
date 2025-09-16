@@ -815,17 +815,17 @@ class AudioManager {
         
         // Define folder structure - files will be discovered dynamically
         this.musicFolders = {
-            start: 'audio/start/',
-            game: 'audio/game/',
-            hack: 'audio/hack/',
-            success: 'audio/success/',
-            loadingScenario: 'audio/loading-scenario/',
-            loadingAI: 'audio/loading-ai/'
+            start: 'public/audio/start/',
+            game: 'public/audio/game/',
+            hack: 'public/audio/hack/',
+            success: 'public/audio/success/',
+            loadingScenario: 'public/audio/loading-scenario/',
+            loadingAI: 'public/audio/loading-ai/'
         };
         
         this.sfxFolders = {
-            button: 'audio/sfx/button/',
-            alert: 'audio/sfx/alert/'
+            button: 'public/audio/sfx/button/',
+            alert: 'public/audio/sfx/alert/'
         };
         
         // Track counts per folder (you can adjust these based on how many files you have)
