@@ -151,7 +151,7 @@ ${titleHistoryText}${recentThemesText}
 - Make failure HILARIOUS but educational
 
 TARGET AUDIENCE: 
-Highschool girls from Belgium
+Highschool girls from European countries (14-18 years old)
 
 SCENARIO THEMES (MUST ROTATE - Pick a DIFFERENT theme each time):
 1. **Password & Authentication Attacks**: Credential stuffing, password breaches, 2FA bypass attempts, account takeover scenarios
